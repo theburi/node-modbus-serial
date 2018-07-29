@@ -22,7 +22,7 @@ var MAX_BUFFER_LENGTH = 256;
  * @param options
  * @constructor
  */
-var RTUBufferedPort = function(path, options) {
+var TTYBufferedPort = function(path, options) {
     var self = this;
 
     // options
@@ -96,7 +96,7 @@ var RTUBufferedPort = function(path, options) {
 
     EventEmitter.call(this);
 };
-util.inherits(RTUBufferedPort, EventEmitter);
+util.inherits(TTYBufferedPort, EventEmitter);
 
 /**
  * Emit the received response, cut the buffer and reset the internal vars.
@@ -105,7 +105,7 @@ util.inherits(RTUBufferedPort, EventEmitter);
  * @param {number} length The length of the response.
  * @private
  */
-RTUBufferedPort.prototype._emitData = function(start, length) {
+TTYBufferedPort.prototype._emitData = function(start, length) {
     var buffer = this._buffer.slice(start, start + length);
 
     modbusSerialDebug({ action: "emit data serial rtu buffered port", buffer: buffer });
@@ -119,7 +119,7 @@ RTUBufferedPort.prototype._emitData = function(start, length) {
  *
  * @param callback
  */
-RTUBufferedPort.prototype.open = function(callback) {
+TTYBufferedPort.prototype.open = function(callback) {
     this._client.open(callback);
 };
 
@@ -128,7 +128,7 @@ RTUBufferedPort.prototype.open = function(callback) {
  *
  * @param callback
  */
-RTUBufferedPort.prototype.close = function(callback) {
+TTYBufferedPort.prototype.close = function(callback) {
     this._client.close(callback);
 };
 
@@ -137,7 +137,7 @@ RTUBufferedPort.prototype.close = function(callback) {
  *
  * @param {Buffer} data
  */
-RTUBufferedPort.prototype.write = function(data) {
+TTYBufferedPort.prototype.write = function(data) {
     if(data.length < MIN_DATA_LENGTH) {
         modbusSerialDebug("expected length of data is to small - minimum is " + MIN_DATA_LENGTH);
         return;
@@ -185,7 +185,7 @@ RTUBufferedPort.prototype.write = function(data) {
     });
 
     modbusSerialDebug({
-        action: "send serial rtu buffered",
+        action: "send serial TTY buffered",
         data: data,
         unitid: this._id,
         functionCode: this._cmd
@@ -193,8 +193,8 @@ RTUBufferedPort.prototype.write = function(data) {
 };
 
 /**
- * RTU buffered port for Modbus.
+ * TTY buffered port for Modbus.
  *
- * @type {RTUBufferedPort}
+ * @type {TTYBufferedPort}
  */
-module.exports = RTUBufferedPort;
+module.exports = TTYBufferedPort;

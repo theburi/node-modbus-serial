@@ -8,22 +8,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yaacov/node-modbus-serial.git"
+    "url": "git+https://github.com/theburi/node-modbus-serial.git"
   },
   "keywords": [
     "modbus",
     "rtu",
     "serial",
     "port",
-    "com",
     "arduino"
   ],
   "author": "Yaacov Zamir <kobi.zamir@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/yaacov/node-modbus-serial/issues"
+    "url": "https://github.com/theburi/node-modbus-serial/issues"
   },
-  "homepage": "https://github.com/yaacov/node-modbus-serial#readme",
+  "homepage": "https://github.com/theburi/node-modbus-serial#readme",
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.16.1",
