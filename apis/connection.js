@@ -230,6 +230,36 @@ var addConnctionAPI = function(Modbus) {
     };
 
     /**
+     * Connect to a communication port, using Bufferd Serial port over TTYS0.
+     *
+     * @param {string} path the path to the Serial Port - required.
+     * @param {Object} options - the serial port options - optional.
+     * @param {Function} next the function to call next.
+     */
+    cl.connectTTYBuffered = function(path, options, next) {
+        // check if we have options
+        if (typeof next === "undefined" && typeof options === "function") {
+            next = options;
+            options = {};
+        }
+
+        // check if we have options
+        if (typeof options === "undefined") {
+            options = {};
+        }
+
+        // create the SerialPort
+        var SerialPort = require("../ports/ttybufferedport");
+        this._port = new SerialPort(path, options);
+
+        // set vmin to smallest modbus packet size
+        options.platformOptions = { vmin: MIN_MODBUSRTU_FRAMESZ, vtime: 0 };
+
+        // open and call next
+        return open(this, next);
+    };
+
+    /**
      * Connect to a communication port, using ASCII Serial port.
      *
      * @param {string} path the path to the Serial Port - required.
