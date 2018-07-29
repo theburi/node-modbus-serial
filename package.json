@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "debug": "^3.0.1",
-    "serialport": "^6.1.1"
+    "serialport": "^6.1.1",
+    "onoff": "^3.2.1"
   }
 }
